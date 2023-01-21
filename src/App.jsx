@@ -46,19 +46,34 @@ function App() {
     setPausePlay(false)
   }
 
-  // pause play hooks
+  // pause play functions 
+
   const timerTicking = () => {
+    console.log(timerSecond)
+    if(timerSecond > 0){
+      setTimerSecond(timerSecond => timerSecond - 1);
+      console.log(timerSecond)
+      console.log("if")
+    }
+    else{
+      setTimerSecond(58);
+      console.log(timerSecond)
+      console.log("else")
+    }
+  }
+
+  const timerCountdown = () => {
     // set interval
     if(pausePlay == true){
-
-      console.log("hello")
+      const interval = setInterval(timerTicking, 1000)
       return () => {
+        clearInterval(interval)
         //close interval
       }
     }
   }
 
-  useEffect(timerTicking, [pausePlay])
+  useEffect(timerCountdown, [pausePlay])
   
 
   return (
