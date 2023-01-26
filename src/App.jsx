@@ -3,11 +3,11 @@ import { useState } from 'react'
 
 function App() {
   const [session, setSession] = useState(25)
+  const [recess ,setRecess] = useState(5)
   const [timerMinute, setTimerMinute] = useState(25)
   const [timerSecond, setTimerSecond] = useState(0)
-  const [pausePlay, setPausePlay] = useState(false)
-  const [recess ,setRecess] = useState(5)
-  const [period ,setPeriod] = useState("Session")
+  const [timerState, setTimerState] = useState(false)
+  const [timerType ,setTimerType] = useState("Session")
 
   // increment decrement functions
   const increment = (event) => {
@@ -43,37 +43,49 @@ function App() {
     setTimerMinute(25)
     setTimerSecond(0)
     setRecess(5)
-    setPausePlay(false)
+    setTimerState(false)
   }
 
   // pause play functions 
 
   const timerTicking = () => {
-    console.log(timerSecond)
-    if(timerSecond > 0){
-      setTimerSecond(timerSecond => timerSecond - 1);
-      console.log(timerSecond)
-      console.log("if")
-    }
-    else{
-      setTimerSecond(58);
-      console.log(timerSecond)
-      console.log("else")
+    console.log(timerSecond, "  timer second")
+    if(timerState){
+      if(timerSecond >= 0){
+        console.log(timerSecond+" timer second greater than 0")
+        setTimerSecond(timerSecond => timerSecond - 1);
+      }
+      else{
+        console.log(timerSecond+" timer second less than 0")
+        if(timerMinute > 0){
+          console.log(timerMinute+" timer minute greater than 0")
+          setTimerMinute(timerMinute => timerMinute - 1)
+          setTimerSecond(59);
+        }
+        else{
+          setTimerType("Break")
+          console.log(timerMinute+" timer minute less than 0")
+          console.log(timerSecond+" timer second")
+        }
+      }
     }
   }
 
   const timerCountdown = () => {
     // set interval
-    if(pausePlay == true){
+    console.log(timerState+" timer state")
+    if(timerState == true){
+      console.log("ticking start")
       const interval = setInterval(timerTicking, 1000)
       return () => {
+        console.log("ticking close")
         clearInterval(interval)
         //close interval
       }
     }
   }
 
-  useEffect(timerCountdown, [pausePlay])
+  useEffect(timerCountdown, [timerState])
   
 
   return (
@@ -100,7 +112,7 @@ function App() {
             </div>
           </div>
           <div className='flex flex-col border-amber-800 border-4 p-2 rounded-2xl'>
-            <div className='text-center'>{period}</div>
+            <div className='text-center'>{timerType}</div>
             <div className='text-center text-5xl'>
               <span>{timerMinute}</span>
               <span> : </span>
@@ -108,7 +120,7 @@ function App() {
             </div>
           </div>
           <div className='flex'>
-            <span className="material-symbols-outlined text-3xl" onClick={() => setPausePlay(!pausePlay)}>pause</span>
+            <span className="material-symbols-outlined text-3xl" onClick={() => setTimerState(!timerState)}>pause</span>
             <span className="material-symbols-outlined text-3xl" onClick={reset}>restart_alt</span>
           </div>
         </div>
