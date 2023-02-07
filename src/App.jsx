@@ -8,6 +8,9 @@ function App() {
   const [timerSecond, setTimerSecond] = useState(0)
   const [timerState, setTimerState] = useState(false)
   const [timerType ,setTimerType] = useState("Session")
+  const [clockMinute ,setClockMinute] = useState(timerMinute)
+  const [clockSecond ,setClockSecond] = useState(timerSecond)
+  
 
   // increment decrement functions
   const increment = (event) => {
@@ -49,23 +52,23 @@ function App() {
   // pause play functions 
 
   const timerTicking = () => {
-    console.log(timerSecond, "  timer second")
+    console.log(clockSecond, "  timer second")
     if(timerState){
-      if(timerSecond >= 0){
-        console.log(timerSecond+" timer second greater than 0")
-        setTimerSecond(timerSecond => timerSecond - 1);
+      if(clockSecond >= 0){
+        console.log(clockSecond+" timer second greater than 0")
+        setClockSecond(clockSecond => clockSecond - 1);
       }
       else{
-        console.log(timerSecond+" timer second less than 0")
+        console.log(clockSecond+" timer second less than 0")
         if(timerMinute > 0){
-          console.log(timerMinute+" timer minute greater than 0")
-          setTimerMinute(timerMinute => timerMinute - 1)
-          setTimerSecond(59);
+          console.log(clockMinute+" timer minute greater than 0")
+          setClockMinute(clockMinute => clockMinute - 1)
+          setClockSecond(59);
         }
         else{
           setTimerType("Break")
-          console.log(timerMinute+" timer minute less than 0")
-          console.log(timerSecond+" timer second")
+          console.log(clockMinute+" timer minute less than 0")
+          console.log(clockSecond+" timer second")
         }
       }
     }
@@ -86,6 +89,10 @@ function App() {
   }
 
   useEffect(timerCountdown, [timerState])
+  useEffect(()=>{
+    setClockMinute(timerMinute)
+    setClockSecond(timerSecond)
+  },[timerMinute,timerSecond])
   
 
   return (
@@ -114,9 +121,9 @@ function App() {
           <div className='flex flex-col border-amber-800 border-4 p-2 rounded-2xl'>
             <div className='text-center'>{timerType}</div>
             <div className='text-center text-5xl'>
-              <span>{timerMinute}</span>
+              <span>{clockMinute}</span>
               <span> : </span>
-              <span>{timerSecond}</span>
+              <span>{clockSecond}</span>
             </div>
           </div>
           <div className='flex'>
