@@ -52,26 +52,27 @@ function App() {
   // pause play functions 
 
   const timerTicking = () => {
-    console.log(clockSecond, "  timer second")
-    if(timerState){
-      if(clockSecond >= 0){
-        console.log(clockSecond+" timer second greater than 0")
-        setClockSecond(clockSecond => clockSecond - 1);
+    console.log("timer ticking")
+    setClockMinute((clockMinute, clockSecond) => {
+      if(clockSecond < 0){
+        // setClockSecond(60)
+        console.log(clockMinute + " minute")
+        console.log(clockSecond + " second")
+        return clockMinute - 1
+      }
+    })
+
+    setClockSecond(clockSecond => {
+      // console.log(clockMinute + " minute")
+      // console.log(clockSecond + " second")
+      if(clockSecond < 0){
+        return 59
       }
       else{
-        console.log(clockSecond+" timer second less than 0")
-        if(timerMinute > 0){
-          console.log(clockMinute+" timer minute greater than 0")
-          setClockMinute(clockMinute => clockMinute - 1)
-          setClockSecond(59);
-        }
-        else{
-          setTimerType("Break")
-          console.log(clockMinute+" timer minute less than 0")
-          console.log(clockSecond+" timer second")
-        }
+        return clockSecond - 1
       }
-    }
+    })
+   
   }
 
   const timerCountdown = () => {
