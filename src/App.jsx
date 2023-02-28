@@ -56,15 +56,13 @@ function App() {
     setClockMinute((clockMinute, clockSecond) => {
       if(clockSecond < 0){
         // setClockSecond(60)
-        console.log(clockMinute + " minute")
-        console.log(clockSecond + " second")
+        // console.log(clockMinute + " minute")
+        // console.log(clockSecond + " second")
         return clockMinute - 1
       }
     })
 
     setClockSecond(clockSecond => {
-      // console.log(clockMinute + " minute")
-      // console.log(clockSecond + " second")
       if(clockSecond < 0){
         return 59
       }
