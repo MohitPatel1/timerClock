@@ -8,7 +8,7 @@ function App() {
   const [timerSecond, setTimerSecond] = useState(0)
   const [timerState, setTimerState] = useState(false)
   const [timerType ,setTimerType] = useState("Session")
-  const [clockMinute ,setClockMinute] = useState(timerMinute)
+  const [clockMinute ,setClockMinute] = useState(25)
   const [clockSecond ,setClockSecond] = useState(timerSecond)
   
 
@@ -54,7 +54,7 @@ function App() {
   const timerTicking = () => {
     console.log("timer ticking")
     setClockMinute((clockMinute, clockSecond) => {
-      if(clockSecond < 0){
+      if(clockSecond < 1){
         // setClockSecond(60)
         // console.log(clockMinute + " minute")
         // console.log(clockSecond + " second")
@@ -67,7 +67,7 @@ function App() {
         return 59
       }
       else{
-        return clockSecond - 1
+        return clockSecond - 10
       }
     })
    
