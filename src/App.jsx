@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useState } from 'react'
+import chaiyya_chaiyaa from '../audios/chalChaiyaChaiya.mp3'
 
 function App() {
   const [session, setSession] = useState(25)
@@ -8,6 +9,9 @@ function App() {
   const [timerSecond, setTimerSecond] = useState(0)
   const [timerState, setTimerState] = useState(false)
   const [timerType ,setTimerType] = useState("Session")  
+  const audio = new Audio()
+  audio.src = chaiyya_chaiyaa
+  console.log(chaiyya_chaiyaa)
 
   // increment decrement functions
   const increment = (event) => {
@@ -53,7 +57,12 @@ function App() {
     setTimerSecond(timerSecond => {
       if(timerSecond < 1){
         setTimerMinute(timerMinute => {
-          return timerMinute - 1
+          if(timerMinute > 1){
+            return timerMinute - 1
+          }
+          else{
+            audio.play()
+          }
         })
         return 59
       }
