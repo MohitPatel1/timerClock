@@ -7,10 +7,7 @@ function App() {
   const [timerMinute, setTimerMinute] = useState(25)
   const [timerSecond, setTimerSecond] = useState(0)
   const [timerState, setTimerState] = useState(false)
-  const [timerType ,setTimerType] = useState("Session")
-  const [clockMinute ,setClockMinute] = useState(timerMinute)
-  const [clockSecond ,setClockSecond] = useState(timerSecond)
-  
+  const [timerType ,setTimerType] = useState("Session")  
 
   // increment decrement functions
   const increment = (event) => {
@@ -52,24 +49,16 @@ function App() {
   // pause play functions 
 
   const timerTicking = () => {
-    console.log("timer ticking")
-    setClockMinute((clockMinute, clockSecond) => {
-      if(clockSecond < 0){
-        // setClockSecond(60)
-        console.log(clockMinute + " minute")
-        console.log(clockSecond + " second")
-        return clockMinute - 1
-      }
-    })
 
-    setClockSecond(clockSecond => {
-      // console.log(clockMinute + " minute")
-      // console.log(clockSecond + " second")
-      if(clockSecond < 0){
+    setTimerSecond(timerSecond => {
+      if(timerSecond < 1){
+        setTimerMinute(timerMinute => {
+          return timerMinute - 1
+        })
         return 59
       }
       else{
-        return clockSecond - 1
+        return timerSecond - 10
       }
     })
    
@@ -90,10 +79,6 @@ function App() {
   }
 
   useEffect(timerCountdown, [timerState])
-  useEffect(()=>{
-    setClockMinute(timerMinute)
-    setClockSecond(timerSecond)
-  },[timerMinute,timerSecond])
   
 
   return (
@@ -103,7 +88,7 @@ function App() {
         <div className='bg-yellow-600 flex flex-col justify-center items-center gap-4 p-6 rounded-[20%]'>
           <div className='flex gap-10'>
             <div className='flex flex-col gap-1 '>
-              <div>recess lenght</div>
+              <div>Break lenght</div>
               <div className='flex gap-1 justify-center'>
                 <span className="material-symbols-outlined text-3xl recess" onClick={increment}>arrow_upward</span>
                 <div>{recess}</div>
@@ -111,7 +96,7 @@ function App() {
               </div>
             </div>
             <div className='flex flex-col gap-1 '>
-              <div>recess lenght</div>
+              <div>Recess lenght</div>
               <div className='flex gap-1 justify-center'>
                 <span className="material-symbols-outlined text-3xl session" onClick={increment}>arrow_upward</span>
                 <div>{session}</div>
@@ -122,9 +107,9 @@ function App() {
           <div className='flex flex-col border-amber-800 border-4 p-2 rounded-2xl'>
             <div className='text-center'>{timerType}</div>
             <div className='text-center text-5xl'>
-              <span>{clockMinute}</span>
+              <span>{timerMinute}</span>
               <span> : </span>
-              <span>{clockSecond}</span>
+              <span>{timerSecond}</span>
             </div>
           </div>
           <div className='flex'>
