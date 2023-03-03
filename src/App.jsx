@@ -11,7 +11,6 @@ function App() {
   const [timerType ,setTimerType] = useState("Session")  
   const audio = new Audio()
   audio.src = chaiyya_chaiyaa
-  console.log(chaiyya_chaiyaa)
 
   // increment decrement functions
   const increment = (event) => {
@@ -43,32 +42,33 @@ function App() {
 
   // reset function
   const reset = () => {
-    setSession(25)
-    setTimerMinute(25)
+    setSession(1)
+    setTimerMinute(1)
     setTimerSecond(0)
-    setRecess(5)
+    setRecess(1)
     setTimerState(false)
   }
 
   // toggles timer type
   const toggleTimerType = () => {
-    if(timerType === 'Session'){
-      setTimerType('Break')
-    }
-    else{
-      setTimerType('Session')
-    }
+    setTimerType(timerType => {
+      if(timerType === 'Session'){
+        return 'Break'
+      }
+      else{
+        return 'Session'
+      }
+    })
   }
 
   // change timer type function
   const timerTypeChange = () => {
     if(timerType == 'Break'){
-      setTimerMinute(recess)
+      setTimerMinute(recess - 1)
     }
     else{
-      reset()
+      setTimerMinute(session - 1)
     }
-
   }
 
 
@@ -79,7 +79,7 @@ function App() {
     setTimerSecond(timerSecond => {
       if(timerSecond < 1){
         setTimerMinute(timerMinute => {
-          if(timerMinute > 1){
+          if(timerMinute > 0){
             return timerMinute - 1
           }
           else{
@@ -98,7 +98,6 @@ function App() {
 
   const timerCountdown = () => {
     // set interval
-    console.log(timerState+" timer state")
     if(timerState == true){
       console.log("ticking start")
       const interval = setInterval(timerTicking, 1000)
