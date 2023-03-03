@@ -50,6 +50,28 @@ function App() {
     setTimerState(false)
   }
 
+  // toggles timer type
+  const toggleTimerType = () => {
+    if(timerType === 'Session'){
+      setTimerType('Break')
+    }
+    else{
+      setTimerType('Session')
+    }
+  }
+
+  // change timer type function
+  const timerTypeChange = () => {
+    if(timerType == 'Break'){
+      setTimerMinute(recess)
+    }
+    else{
+      reset()
+    }
+
+  }
+
+
   // pause play functions 
 
   const timerTicking = () => {
@@ -62,6 +84,7 @@ function App() {
           }
           else{
             audio.play()
+            toggleTimerType()
           }
         })
         return 59
@@ -88,6 +111,7 @@ function App() {
   }
 
   useEffect(timerCountdown, [timerState])
+  useEffect(timerTypeChange, [timerType])
   
 
   return (
