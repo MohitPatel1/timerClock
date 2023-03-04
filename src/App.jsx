@@ -42,10 +42,10 @@ function App() {
 
   // reset function
   const reset = () => {
-    setSession(1)
-    setTimerMinute(1)
+    setSession(25)
+    setTimerMinute(25)
     setTimerSecond(0)
-    setRecess(1)
+    setRecess(5)
     setTimerState(false)
   }
 
@@ -64,10 +64,10 @@ function App() {
   // change timer type function
   const timerTypeChange = () => {
     if(timerType == 'Break'){
-      setTimerMinute(recess - 1)
+      setTimerMinute(recess)
     }
     else{
-      setTimerMinute(session - 1)
+      setTimerMinute(session)
     }
   }
 
@@ -90,7 +90,7 @@ function App() {
         return 59
       }
       else{
-        return timerSecond - 10
+        return timerSecond - 5
       }
     })
    
