@@ -120,33 +120,33 @@ function App() {
         <div className='bg-yellow-600 flex flex-col justify-center items-center gap-4 p-6 rounded-[20%]'>
           <div className='flex gap-10'>
             <div className='flex flex-col gap-1 '>
-              <div>Break lenght</div>
+              <div id='break-label'>Break Lenght</div>
               <div className='flex gap-1 justify-center'>
-                <span className="material-symbols-outlined text-3xl recess" onClick={increment}>arrow_upward</span>
-                <div>{recess}</div>
-                <span className="material-symbols-outlined text-3xl recess" onClick={decrement}>arrow_downward</span>
+                <span className="material-symbols-outlined text-3xl recess" id='session-increment' onClick={increment}>arrow_upward</span>
+                <div id="break-length">{recess}</div>
+                <span className="material-symbols-outlined text-3xl recess" id='break-decrement' onClick={decrement}>arrow_downward</span>
               </div>
             </div>
             <div className='flex flex-col gap-1 '>
-              <div>Recess lenght</div>
+              <div id='session-label'>Session Length</div>
               <div className='flex gap-1 justify-center'>
-                <span className="material-symbols-outlined text-3xl session" onClick={increment}>arrow_upward</span>
-                <div>{session}</div>
-                <span className="material-symbols-outlined text-3xl session" onClick={decrement}>arrow_downward</span>
+                <span className="material-symbols-outlined text-3xl session" id='break-increment' onClick={increment}>arrow_upward</span>
+                <div id="session-length">{session}</div>
+                <span className="material-symbols-outlined text-3xl session" id='session-decrement' onClick={decrement}>arrow_downward</span>
               </div>
             </div>
           </div>
           <div className='flex flex-col border-amber-800 border-4 p-2 rounded-2xl'>
-            <div className='text-center'>{timerType}</div>
-            <div className='text-center text-5xl'>
+            <div className='text-center' id="timer-label">{timerType}</div>
+            <div className='text-center text-5xl' id="time-left">
               <span>{timerMinute}</span>
               <span> : </span>
               <span>{timerSecond}</span>
             </div>
           </div>
           <div className='flex'>
-            <span className="material-symbols-outlined text-3xl" onClick={() => setTimerState(!timerState)}>pause</span>
-            <span className="material-symbols-outlined text-3xl" onClick={reset}>restart_alt</span>
+            <span className="material-symbols-outlined text-3xl" id="start_stop" onClick={() => setTimerState(!timerState)}>pause</span>
+            <span className="material-symbols-outlined text-3xl" id="reset" onClick={reset}>restart_alt</span>
           </div>
         </div>
       </div>
